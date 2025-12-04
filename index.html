@@ -16,18 +16,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-    /* كود مختصر - يشيل الصورة فقط */
-@media (max-width: 768px) {
-    /* يشيل الصورة */
-    .hero-section .col-lg-6.text-center {
-        display: none !important;
-    }
-    
-    /* يوسع النص */
-    .hero-section .col-lg-6:first-child {
-        width: 100% !important;
-    }
-}
+        /* كود مختصر - يشيل الصورة فقط */
+        @media (max-width: 768px) {
+            /* يشيل الصورة */
+            .hero-section .col-lg-6.text-center {
+                display: none !important;
+            }
+            
+            /* يوسع النص */
+            .hero-section .col-lg-6:first-child {
+                width: 100% !important;
+            }
+        }
+        
         * {
             font-family: 'Cairo', sans-serif;
         }
@@ -396,6 +397,69 @@
         .text-silver {
             color: #6b7280;
         }
+
+        /* نظام الدفع الجديد */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-option {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .qr-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .bank-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .payment-steps {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .btn-discord {
+            background: #5865f2;
+            color: white;
+            border: none;
+        }
+
+        .btn-discord:hover {
+            background: #4752c4;
+            color: white;
+        }
     </style>
 </head>
 
@@ -417,6 +481,7 @@
                     <li class="nav-item"><a class="nav-link" href="#ranks">الرتب</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">المميزات</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">الأسعار</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showMyOrders(event)"><i class="fas fa-shopping-bag"></i> طلباتي</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
                 </ul>
 
@@ -1099,7 +1164,50 @@
             }
         };
 
-        // دالة الاشتراك
+        // اختيار طريقة الدفع
+        function selectPayment(method) {
+            document.getElementById('selectedPayment').value = method;
+            
+            const detailsDiv = document.getElementById('paymentDetails');
+            let content = '';
+            
+            if (method === 'stc') {
+                content = `
+                    <div class="alert alert-info">
+                        <h6>📱 STC Pay:</h6>
+                        <p>ارسل المبلغ إلى الرقم: <strong>0551234567</strong></p>
+                        <p>أو سجل كود الدفع: <strong>STORM2024</strong></p>
+                    </div>
+                `;
+            } else if (method === 'mada') {
+                content = `
+                    <div class="alert alert-success">
+                        <h6>💳 مدى:</h6>
+                        <p>استخدم بطاقتك عبر الرابط:</p>
+                        <button class="btn btn-success w-100" onclick="simulateMadaPayment()">
+                            <i class="fas fa-credit-card"></i> الدفع ببطاقة مدى
+                        </button>
+                    </div>
+                `;
+            } else if (method === 'bank') {
+                content = `
+                    <div class="bank-details">
+                        <h6>🏦 معلومات التحويل:</h6>
+                        <p><strong>البنك:</strong> الراجحي</p>
+                        <p><strong>اسم المستفيد:</strong> STORM MC STORE</p>
+                        <p><strong>IBAN:</strong> SA44 2000 0001 2345 6789 1234</p>
+                        <p><strong>رقم الحساب:</strong> 1234567890123456</p>
+                        <input type="file" id="receipt" class="form-control mt-3" 
+                               accept="image/*" placeholder="ارفع صورة الإيصال">
+                    </div>
+                `;
+            }
+            
+            detailsDiv.innerHTML = content;
+            detailsDiv.style.display = 'block';
+        }
+
+        // دالة الاشتراك المعدلة
         function subscribeRank(rankType, period) {
             const rank = ranks[rankType];
             const price = period === 'monthly' ? rank.monthly : rank.yearly;
@@ -1117,164 +1225,335 @@
                         
                         <div class="text-start mt-4">
                             <h6>معلومات الاشتراك:</h6>
-                            <input type="text" id="discordName" class="form-control mb-2" placeholder="اسمك في الدسكورد (مثال: Ahmed#1234)" required>
-                            <select id="paymentMethod" class="form-select mb-3" required>
-                                <option value="">اختر طريقة الدفع</option>
-                                <option value="stc">STC Pay</option>
-                                <option value="mada">مدى</option>
-                                <option value="apple">Apple Pay</option>
-                                <option value="bank">تحويل بنكي</option>
-                            </select>
+                            <input type="text" id="discordName" class="form-control mb-3" 
+                                   placeholder="اسمك في الدسكورد (مثال: Ahmed#1234)" required>
+                            
+                            <h6 class="mt-4">📱 اختر طريقة الدفع:</h6>
+                            <div class="payment-methods">
+                                <div class="payment-option" onclick="selectPayment('stc')">
+                                    <div class="payment-icon" style="color: #00b894;">📱</div>
+                                    <div>STC Pay</div>
+                                </div>
+                                <div class="payment-option" onclick="selectPayment('mada')">
+                                    <div class="payment-icon" style="color: #0984e3;">💳</div>
+                                    <div>مدى</div>
+                                </div>
+                                <div class="payment-option" onclick="selectPayment('bank')">
+                                    <div class="payment-icon" style="color: #6c5ce7;">🏦</div>
+                                    <div>تحويل بنكي</div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="selectedPayment" value="">
+                            
+                            <div id="paymentDetails" class="mt-3" style="display: none;">
+                                <!-- تفاصيل الدفع تظهر هنا -->
+                            </div>
                         </div>
                     </div>
                 `,
                 showCancelButton: true,
-                confirmButtonText: 'إتمام الدفع',
+                confirmButtonText: 'متابعة للدفع',
                 cancelButtonText: 'إلغاء',
                 confirmButtonColor: '#6366f1',
+                didOpen: () => {
+                    // إضافة حدث للمربعات
+                    document.querySelectorAll('.payment-option').forEach(option => {
+                        option.addEventListener('click', function() {
+                            document.querySelectorAll('.payment-option').forEach(el => 
+                                el.classList.remove('selected'));
+                            this.classList.add('selected');
+                        });
+                    });
+                },
                 preConfirm: () => {
                     const discordName = document.getElementById('discordName').value;
-                    const paymentMethod = document.getElementById('paymentMethod').value;
+                    const paymentMethod = document.getElementById('selectedPayment').value;
 
-                    if (!discordName || !paymentMethod) {
-                        Swal.showValidationMessage('يرجى ملء جميع الحقول');
+                    if (!discordName) {
+                        Swal.showValidationMessage('يرجى إدخال اسم الدسكورد');
+                        return false;
+                    }
+                    
+                    if (!paymentMethod) {
+                        Swal.showValidationMessage('يرجى اختيار طريقة الدفع');
                         return false;
                     }
 
-                    return {discordName, paymentMethod};
+                    return {discordName, paymentMethod, rank, price, periodText};
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    showPaymentDetails(rank, price, periodText, result.value);
+                    showPaymentGateway(result.value);
                 }
             });
         }
 
-        // عرض تفاصيل الدفع
-        function showPaymentDetails(rank, price, period, userData) {
+        // دالة عرض بوابة الدفع
+        function showPaymentGateway(data) {
             Swal.fire({
-                title: '💳 إتمام الدفع',
+                title: '💳 إتمام عملية الدفع',
                 html: `
                     <div class="text-center">
-                        <div style="font-size: 3rem;">${rank.icon}</div>
-                        <h4 class="mt-2">${rank.name}</h4>
-                        <p>المستخدم: ${userData.discordName}</p>
-                        <div class="alert alert-info">
-                            <h5>المبلغ: ${price} ريال</h5>
-                            <p>لمدة: ${period}</p>
+                        <div style="font-size: 3rem;">${data.rank.icon}</div>
+                        <h4>${data.rank.name}</h4>
+                        <p>المستخدم: <strong>${data.discordName}</strong></p>
+                        
+                        <div class="alert alert-primary">
+                            <h5>المبلغ: ${data.price} ريال</h5>
+                            <p>لمدة: ${data.periodText}</p>
+                        </div>
+                        
+                        <div id="paymentStep">
+                            ${getPaymentStepContent(data.paymentMethod)}
                         </div>
                         
                         <div class="mt-4">
-                            <h6>📱 طرق الدفع:</h6>
-                            <div class="row mt-3">
-                                <div class="col-6">
-                                    <button class="btn btn-outline-primary w-100 mb-2" onclick="showQRCode('stc')">
-                                        STC Pay
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-outline-success w-100 mb-2" onclick="showQRCode('mada')">
-                                        مدى
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-outline-dark w-100 mb-2" onclick="showQRCode('apple')">
-                                        Apple Pay
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-outline-warning w-100 mb-2" onclick="showBankTransfer()">
-                                        تحويل بنكي
-                                    </button>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="confirmPayment">
+                                <label class="form-check-label" for="confirmPayment">
+                                    أكدت إتمام عملية الدفع
+                                </label>
                             </div>
                         </div>
                     </div>
                 `,
                 showCancelButton: true,
-                confirmButtonText: 'تم الدفع',
-                cancelButtonText: 'رجوع'
+                confirmButtonText: 'تأكيد الدفع',
+                cancelButtonText: 'رجوع',
+                confirmButtonColor: '#10b981',
+                width: 600,
+                preConfirm: () => {
+                    const confirmed = document.getElementById('confirmPayment').checked;
+                    if (!confirmed) {
+                        Swal.showValidationMessage('يرجى تأكيد إتمام الدفع');
+                        return false;
+                    }
+                    return true;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    completePayment(data);
+                }
             });
         }
 
-        // عرض QR Code
-        function showQRCode(method) {
-            const methodNames = {
-                stc: 'STC Pay',
-                mada: 'مدى',
-                apple: 'Apple Pay'
-            };
-
-            Swal.fire({
-                title: `📲 ${methodNames[method]}`,
-                html: `
-                    <div class="text-center">
-                        <p>مسح الكود التالي للدفع:</p>
-                        <div style="width: 200px; height: 200px; background: #f3f4f6; margin: 20px auto; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 4rem;">📱</div>
-                                <small class="text-muted">كود الدفع</small>
+        // محتوى خطوات الدفع حسب الطريقة
+        function getPaymentStepContent(method) {
+            const steps = {
+                'stc': `
+                    <div class="payment-steps">
+                        <h6>📱 خطوات الدفع عبر STC Pay:</h6>
+                        <ol class="text-start">
+                            <li>افتح تطبيق STC Pay</li>
+                            <li>ادخل الرقم: <strong>0551234567</strong></li>
+                            <li>أدخل المبلغ</li>
+                            <li>أضف ملاحظة: <code>STORM-MC</code></li>
+                            <li>أرسل الدفع</li>
+                        </ol>
+                        <div class="qr-container">
+                            <div class="text-center">
+                                <div style="font-size: 5rem;">📲</div>
+                                <small>كود الدفع: <strong>STORM2024</strong></small>
                             </div>
                         </div>
-                        <p class="mt-3">أو ارسل المبلغ إلى: <strong>0551234567</strong></p>
                     </div>
                 `,
-                confirmButtonText: 'تم الدفع',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    showSuccess();
-                }
-            });
-        }
-
-        // عرض التحويل البنكي
-        function showBankTransfer() {
-            Swal.fire({
-                title: '🏦 تحويل بنكي',
-                html: `
-                    <div class="text-start">
-                        <p>قم بالتحويل إلى:</p>
-                        <div class="alert alert-info">
-                            <p><strong>اسم البنك:</strong> الراجحي</p>
-                            <p><strong>اسم المستفيد:</strong> STORM MC STORE</p>
-                            <p><strong>IBAN:</strong> SA44 2000 0001 2345 6789 1234</p>
-                            <p><strong>رقم الحساب:</strong> 1234567890123456</p>
+                'mada': `
+                    <div class="payment-steps">
+                        <h6>💳 محاكاة الدفع ببطاقة مدى:</h6>
+                        <div class="card p-4 mb-3">
+                            <input type="text" class="form-control mb-2" placeholder="رقم البطاقة" maxlength="16">
+                            <input type="text" class="form-control mb-2" placeholder="تاريخ الانتهاء (MM/YY)">
+                            <input type="text" class="form-control mb-2" placeholder="CVV" maxlength="3">
+                            <button class="btn btn-success" onclick="simulateMadaPayment()">
+                                <i class="fas fa-lock"></i> تأكيد الدفع الآمن
+                            </button>
                         </div>
-                        <p>بعد التحويل، أرسل صورة الإيصال على الدسكورد.</p>
+                        <div class="alert alert-warning">
+                            <small><i class="fas fa-info-circle"></i> هذه محاكاة للدفع فقط</small>
+                        </div>
                     </div>
                 `,
-                confirmButtonText: 'تم التحويل',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    showSuccess();
-                }
+                'bank': `
+                    <div class="payment-steps">
+                        <h6>🏦 خطوات التحويل البنكي:</h6>
+                        <ol class="text-start">
+                            <li>قم بالتحويل للحساب أعلاه</li>
+                            <li>احفظ صورة الإيصال</li>
+                            <li>انضم لسيرفر الدسكورد</li>
+                            <li>أرسل الإيصال في قسم الدعم</li>
+                            <li>انتظر التفعيل خلال 24 ساعة</li>
+                        </ol>
+                        <div class="alert alert-info">
+                            <p><strong>مهم:</strong> بعد التحويل، أرسل الإيصال على الدسكورد:</p>
+                            <a href="https://discord.com/channels/1445508458429546751/1445891422518640773" 
+                               target="_blank" class="btn btn-sm btn-primary">
+                                <i class="fab fa-discord"></i> قسم الدعم في الدسكورد
+                            </a>
+                        </div>
+                    </div>
+                `
+            };
+            
+            return steps[method] || steps['bank'];
+        }
+
+        // محاكاة الدفع ببطاقة مدى
+        function simulateMadaPayment() {
+            Swal.fire({
+                title: '🔒 جاري معالجة الدفع',
+                html: `
+                    <div class="text-center">
+                        <div class="spinner-border text-primary mb-3" role="status"></div>
+                        <p>جاري التحقق من البطاقة...</p>
+                        <div class="progress mb-3">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                 style="width: 100%"></div>
+                        </div>
+                    </div>
+                `,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                timer: 2000,
+                timerProgressBar: true
+            }).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: '✅ تم الدفع بنجاح!',
+                    text: 'تمت عملية الدفع بنجاح',
+                    confirmButtonText: 'متابعة'
+                });
             });
         }
 
-        // عرض نجاح الدفع
-        function showSuccess() {
+        // إكمال عملية الدفع
+        function completePayment(data) {
+            // حفظ البيانات محلياً
+            const paymentData = {
+                discordName: data.discordName,
+                rank: data.rank.name,
+                price: data.price,
+                period: data.periodText,
+                date: new Date().toLocaleDateString('ar-SA'),
+                status: 'pending',
+                orderId: `STORM-${Date.now().toString().slice(-6)}`
+            };
+            
+            // حفظ في localStorage
+            let payments = JSON.parse(localStorage.getItem('storm_payments') || '[]');
+            payments.push(paymentData);
+            localStorage.setItem('storm_payments', JSON.stringify(payments));
+            
+            // إظهار نجاح الدفع
             Swal.fire({
-                title: '🎉 تم بنجاح!',
+                title: '🎉 تم استلام طلبك!',
                 html: `
                     <div class="text-center">
                         <div style="font-size: 5rem; color: #10b981;">✓</div>
-                        <h4 class="mt-3">تم استلام طلبك!</h4>
-                        <p class="mt-3">سيتم تفعيل رتبتك خلال 24 ساعة كحد أقصى.</p>
+                        <h4 class="mt-3">تم تأكيد عملية الدفع!</h4>
+                        <p class="mt-3">رقم طلبك: <strong>${paymentData.orderId}</strong></p>
+                        
                         <div class="alert alert-success mt-3">
-                            <h6>🚀 الخطوات التالية:</h6>
+                            <h6>🚀 خطوات التفعيل:</h6>
                             <ol class="text-start mt-2">
-                                <li>انضم لسيرفر الدسكورد: <a href="https://discord.gg/eEUXxeEBKT" target="_blank">discord.gg/eEUXxeEBKT</a></li>
-                                <li>افتح تذكرة في قسم الدعم: <a href="https://discord.com/channels/1445508458429546751/1445891422518640773" target="_blank">📩┃رفع-تذكرة</a></li>
-                                <li>ارسل اسم المستخدم</li>
-                                <li>انتظر التفعيل</li>
+                                <li>انضم لسيرفر الدسكورد:
+                                    <br><a href="https://discord.gg/eEUXxeEBKT" target="_blank">
+                                        discord.gg/eEUXxeEBKT
+                                    </a>
+                                </li>
+                                <li>افتح تذكرة في قسم الدعم:
+                                    <br><a href="https://discord.com/channels/1445508458429546751/1445891422518640773" target="_blank">
+                                        📩┃رفع-تذكرة
+                                    </a>
+                                </li>
+                                <li>اكتب رقم طلبك: <strong>${paymentData.orderId}</strong></li>
+                                <li>انتظر التفعيل خلال 24 ساعة</li>
                             </ol>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button class="btn btn-primary me-2" onclick="copyText('${paymentData.orderId}')">
+                                <i class="fas fa-copy"></i> نسخ رقم الطلب
+                            </button>
+                            <a href="https://discord.gg/eEUXxeEBKT" target="_blank" class="btn btn-discord">
+                                <i class="fab fa-discord"></i> الانتقال للدسكورد
+                            </a>
                         </div>
                     </div>
                 `,
+                width: 700,
                 confirmButtonText: 'حسناً',
                 icon: 'success'
+            });
+        }
+
+        // دالة نسخ النص
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم النسخ!',
+                    text: 'تم النسخ إلى الحافظة',
+                    timer: 1500
+                });
+            });
+        }
+
+        // عرض طلباتي
+        function showMyOrders(e) {
+            if (e) e.preventDefault();
+            
+            const payments = JSON.parse(localStorage.getItem('storm_payments') || '[]');
+            
+            if (payments.length === 0) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'لا توجد طلبات',
+                    text: 'لم تقم بأي عملية شراء بعد'
+                });
+                return;
+            }
+            
+            let html = `
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>التاريخ</th>
+                                <th>الرتبة</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            payments.forEach((payment, index) => {
+                html += `
+                    <tr>
+                        <td><strong>${payment.orderId || 'N/A'}</strong></td>
+                        <td>${payment.date}</td>
+                        <td>${payment.rank}</td>
+                        <td>${payment.price} ريال</td>
+                        <td><span class="badge bg-warning">قيد المعالجة</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="copyText('${payment.orderId || ''}')">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table></div>`;
+            
+            Swal.fire({
+                title: '📦 طلباتي',
+                html: html,
+                width: 900,
+                confirmButtonText: 'حسناً'
             });
         }
 
@@ -1370,5 +1649,4 @@
         });
     </script>
 </body>
-
 </html>
