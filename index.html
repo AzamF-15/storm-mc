@@ -16,6 +16,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+    /* كود مختصر - يشيل الصورة فقط */
+@media (max-width: 768px) {
+    /* يشيل الصورة */
+    .hero-section .col-lg-6.text-center {
+        display: none !important;
+    }
+    
+    /* يوسع النص */
+    .hero-section .col-lg-6:first-child {
+        width: 100% !important;
+    }
+}
         * {
             font-family: 'Cairo', sans-serif;
         }
