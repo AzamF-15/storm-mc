@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 STORM MC STORE | متجر الرتب الحصري</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            background: var(--light);
+            color: #1e293b;
+            padding-top: 76px;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-radius: 25px;
+            padding: 80px 0;
+            margin: 30px 0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Rank Cards */
+        .rank-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            position: relative;
+        }
+
+        .rank-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        .rank-header {
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rank-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.1), transparent);
+        }
+
+        .rank-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        .rank-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank-price {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin: 15px 0;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .rank-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .rank-features {
+            padding: 30px;
+            background: white;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .feature-icon {
+            color: var(--primary);
+            margin-left: 15px;
+            font-size: 1.2rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .btn-subscribe {
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-subscribe::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .btn-subscribe:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline-subscribe {
+            border: 2px solid;
+            background: transparent;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-subscribe:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Badges */
+        .badge-discount {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--danger);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            z-index: 10;
+            transform: rotate(-5deg);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: rotate(-5deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(-5deg) scale(1.05);
+            }
+
+            100% {
+                transform: rotate(-5deg) scale(1);
+            }
+        }
+
+        /* Sections */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 2.8rem;
+            font-weight: 800;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            margin-top: 80px;
+            padding: 60px 0 30px;
+            border-top: 5px solid var(--primary);
+        }
+
+        .footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .rank-price {
+                font-size: 2.2rem;
+            }
+
+            .rank-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-section {
+                padding: 50px 0;
+            }
+
+            .display-4 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Custom Colors for Ranks */
+        .celestial {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .golden {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+        }
+
+        .diamond {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+
+        .sparkle {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            color: #333;
+        }
+
+        .silver {
+            background: linear-gradient(135deg, #d4d4d4 0%, #a8a8a8 100%);
+            color: #333;
+        }
+
+        .text-celestial {
+            color: #764ba2;
+        }
+
+        .text-golden {
+            color: #f59e0b;
+        }
+
+        .text-diamond {
+            color: #06b6d4;
+        }
+
+        .text-sparkle {
+            color: #3b82f6;
+        }
+
+        .text-silver {
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-crown me-2"></i>STORM MC STORE
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ranks">الرتب</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">المميزات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">الأسعار</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
+                </ul>
+
+                <div class="ms-3">
+                    <a href="https://discord.gg/eEUXxeEBKT" target="_blank" class="btn btn-outline-primary">
+                        <i class="fab fa-discord"></i> انضم لسيرفرنا
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center hero-content">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4 animate-fade-in-up">
+                        <span
+                            style="background: linear-gradient(45deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            🌟 ارتقِ بمستواك
+                        </span>
+                    </h1>
+                    <p class="lead mb-4 animate-fade-in-up" style="animation-delay: 0.2s;">
+                        انضم إلى رتب <strong>STORM MC STORE</strong> واستمتع بأفضل المميزات في الدسكورد وماينكرافت. احصل
+                        على رتبتك المفضلة الآن!
+                    </p>
+                    <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                        <a href="#ranks" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-gem"></i> استعرض الرتب
+                        </a>
+                        <a href="#pricing" class="btn btn-outline-dark btn-lg">
+                            <i class="fas fa-shopping-cart"></i> اشترك الآن
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center animate-fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="position-relative" style="display: inline-block;">
+                        <div
+                            style="font-size: 8rem; color: #6366f1; filter: drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3));">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="position-absolute top-0 start-0 translate-middle"
+                            style="font-size: 3rem; color: #f59e0b;">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="position-absolute top-0 end-0 translate-middle"
+                            style="font-size: 3rem; color: #8b5cf6;">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ranks Section -->
+    <section id="ranks" class="py-5">
+        <div class="container">
+            <h2 class="section-title">✨ رتبنا الحصرية ✨</h2>
+            <p class="text-center text-muted mb-5 lead">اختر الرتبة التي تناسبك واستمتع بمميزات لا تتوفر لأحد غيرنا</p>
+
+            <div class="row g-4">
+                <!-- Rank 1: Celestial Grace -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up">
+                        <div class="badge-discount">خصم 20% سنوي</div>
+                        <div class="rank-header celestial">
+                            <div class="rank-icon">🌟</div>
+                            <h3 class="rank-title">سلاسة النخبة</h3>
+                            <div class="rank-price">50 ريال<small>/شهر</small></div>
+                            <small>أو 500 ريال/سنة</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تصميم بروفايل كوني متحرك</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">مركز تحكم شخصي متكامل</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تأثير كوني (كواكب ونجوم)</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">جميع الكيتات المتاحة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">100,000 عملة سيرفر شهرياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">خصم 75% في جميع المتاجر</span>
+                            </div>
+
+                            <button class="btn-subscribe celestial" onclick="subscribeRank('celestial', 'monthly')">
+                                <i class="fas fa-rocket"></i> اشترك شهرياً - 50 ريال
+                            </button>
+
+                            <button class="btn-outline-subscribe text-celestial border-celestial"
+                                onclick="subscribeRank('celestial', 'yearly')">
+                                اشتراك سنوي - 500 ريال <span class="badge bg-success ms-2">توفير 100 ريال</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rank 2: Golden Sovereign -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up" style="animation-delay: 0.1s">
+                        <div class="rank-header golden">
+                            <div class="rank-icon">👑</div>
+                            <h3 class="rank-title">التاج الذهبي</h3>
+                            <div class="rank-price">25 ريال<small>/شهر</small></div>
+                            <small>أو 250 ريال/سنة</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تصميم بروفايل ذهبي ملكي</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">لوحة تحكم متميزة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تاج ذهبي متوهج فوق الرأس</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">كيت فاخر جداً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">50,000 عملة سيرفر شهرياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">خصم 50% في جميع المتاجر</span>
+                            </div>
+
+                            <button class="btn-subscribe golden" onclick="subscribeRank('golden', 'monthly')">
+                                <i class="fas fa-crown"></i> اشترك شهرياً - 25 ريال
+                            </button>
+
+                            <button class="btn-outline-subscribe text-golden border-golden"
+                                onclick="subscribeRank('golden', 'yearly')">
+                                اشتراك سنوي - 250 ريال <span class="badge bg-success ms-2">توفير 50 ريال</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rank 3: Diamond Elite -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up" style="animation-delay: 0.2s">
+                        <div class="rank-header diamond">
+                            <div class="rank-icon">💎</div>
+                            <h3 class="rank-title">الماس</h3>
+                            <div class="rank-price">10 ريال<small>/شهر</small></div>
+                            <small>أو 100 ريال/سنة</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">روم صوتي خاص</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">إحصائيات مفصلة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تأثير "المجرة الماسية"</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">كيت ألماسية شاملة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">30,000 عملة سيرفر شهرياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">خصم 40% في المشتريات</span>
+                            </div>
+
+                            <button class="btn-subscribe diamond text-dark"
+                                onclick="subscribeRank('diamond', 'monthly')">
+                                <i class="fas fa-gem"></i> اشترك شهرياً - 10 ريال
+                            </button>
+
+                            <button class="btn-outline-subscribe text-diamond border-diamond"
+                                onclick="subscribeRank('diamond', 'yearly')">
+                                اشتراك سنوي - 100 ريال <span class="badge bg-success ms-2">توفير 20 ريال</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rank 4: Diamond Spark -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up" style="animation-delay: 0.3s">
+                        <div class="rank-header sparkle">
+                            <div class="rank-icon">✨</div>
+                            <h3 class="rank-title">بريق الألماس</h3>
+                            <div class="rank-price">5 ريال<small>/شهر</small></div>
+                            <small>أو 50 ريال/سنة</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">لون سماوي مع تأثير لامع</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">إيموجيات ماسية حصرية</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">تأثيرات جزيئية ماسية</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">كيت ماسي متكامل</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">15,000 عملة سيرفر شهرياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">خصم 25% في المتجر</span>
+                            </div>
+
+                            <button class="btn-subscribe sparkle text-dark"
+                                onclick="subscribeRank('sparkle', 'monthly')">
+                                <i class="fas fa-sparkles"></i> اشترك شهرياً - 5 ريال
+                            </button>
+
+                            <button class="btn-outline-subscribe text-sparkle border-sparkle"
+                                onclick="subscribeRank('sparkle', 'yearly')">
+                                اشتراك سنوي - 50 ريال <span class="badge bg-success ms-2">توفير 10 ريال</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rank 5: Silver Star -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up" style="animation-delay: 0.4s">
+                        <div class="rank-header silver">
+                            <div class="rank-icon">⭐</div>
+                            <h3 class="rank-title">النجمة الفضية</h3>
+                            <div class="rank-price">2.5 ريال<small>/شهر</small></div>
+                            <small>أو 25 ريال/سنة</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">لون فضي للاسم</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">صلاحية إرسال ملفات وصور</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">نجمة فضية فوق الرأس</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">كيت فضي أساسي</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">5,000 عملة سيرفر شهرياً</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check feature-icon"></i>
+                                <span class="feature-text">خصم 10% في المتجر</span>
+                            </div>
+
+                            <button class="btn-subscribe silver text-dark" onclick="subscribeRank('silver', 'monthly')">
+                                <i class="fas fa-star"></i> اشترك شهرياً - 2.5 ريال
+                            </button>
+
+                            <button class="btn-outline-subscribe text-silver border-silver"
+                                onclick="subscribeRank('silver', 'yearly')">
+                                اشتراك سنوي - 25 ريال <span class="badge bg-success ms-2">توفير 5 ريال</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compare All Ranks -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="rank-card animate-fade-in-up" style="animation-delay: 0.5s">
+                        <div class="rank-header" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
+                            <div class="rank-icon">📊</div>
+                            <h3 class="rank-title">مقارنة الرتب</h3>
+                            <div class="rank-price">شاهد الفرق</div>
+                            <small>بين جميع الرتب</small>
+                        </div>
+                        <div class="rank-features">
+                            <div class="feature-item">
+                                <i class="fas fa-chart-bar feature-icon text-primary"></i>
+                                <span class="feature-text">جدول مقارنة شامل</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-percentage feature-icon text-success"></i>
+                                <span class="feature-text">مقارنة الأسعار والخصومات</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-list-check feature-icon text-warning"></i>
+                                <span class="feature-text">مقارنة المميزات</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-crown feature-icon text-danger"></i>
+                                <span class="feature-text">اختر الرتبة المناسبة لك</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-question-circle feature-icon text-info"></i>
+                                <span class="feature-text">أسئلة وأجوبة شائعة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-headset feature-icon text-secondary"></i>
+                                <span class="feature-text">دعم فني متخصص</span>
+                            </div>
+
+                            <button class="btn btn-dark btn-lg w-100 mt-3" onclick="showComparison()">
+                                <i class="fas fa-exchange-alt"></i> عرض المقارنة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">🎁 مميزات الاشتراك</h2>
+            <p class="text-center text-muted mb-5 lead">لماذا تختار رتب STORM MC STORE؟</p>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="display-1 mb-3 text-primary">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <h4 class="mb-3">في الدسكورد</h4>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> ألوان وألقاب مميزة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> رومات صوتية خاصة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> صلاحيات إدارية</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> إيموجيات حصرية</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> إحصائيات مفصلة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="display-1 mb-3 text-warning">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4 class="mb-3">في ماينكرافت</h4>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> تأثيرات خاصة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> كيتات حصرية</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> عملات سيرفر</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> خصومات كبيرة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> مميزات فريدة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="display-1 mb-3 text-success">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h4 class="mb-3">حصريات إضافية</h4>
+                            <ul class="list-unstyled text-start">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> فعاليات خاصة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> هدايا دورية</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> دعم فوري 24/7</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> ترقيات خاصة</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> عضوية نخبة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5">
+        <div class="container">
+            <h2 class="section-title">💰 الأسعار</h2>
+
+            <div class="row g-4 text-center">
+                <div class="col-md-2 col-6">
+                    <div class="card border-primary border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">🌟</div>
+                            <h6>سلاسة النخبة</h6>
+                            <div class="fw-bold fs-4 mt-2">50 ريال</div>
+                            <small class="text-muted">/شهر</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-6">
+                    <div class="card border-warning border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">👑</div>
+                            <h6>التاج الذهبي</h6>
+                            <div class="fw-bold fs-4 mt-2">25 ريال</div>
+                            <small class="text-muted">/شهر</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-6">
+                    <div class="card border-info border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">💎</div>
+                            <h6>الماس</h6>
+                            <div class="fw-bold fs-4 mt-2">10 ريال</div>
+                            <small class="text-muted">/شهر</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-6">
+                    <div class="card border-success border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">✨</div>
+                            <h6>بريق الألماس</h6>
+                            <div class="fw-bold fs-4 mt-2">5 ريال</div>
+                            <small class="text-muted">/شهر</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-6">
+                    <div class="card border-secondary border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">⭐</div>
+                            <h6>النجمة الفضية</h6>
+                            <div class="fw-bold fs-4 mt-2">2.5 ريال</div>
+                            <small class="text-muted">/شهر</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 col-6">
+                    <div class="card border-danger border-2 h-100">
+                        <div class="card-body">
+                            <div class="display-6 mb-2">🎁</div>
+                            <h6>خصم سنوي</h6>
+                            <div class="fw-bold fs-4 mt-2">10-20%</div>
+                            <small class="text-muted">توفير</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <div class="alert alert-warning d-inline-block">
+                    <h5><i class="fas fa-tags"></i> عروض خاصة!</h5>
+                    <p class="mb-0">اشترك سنوياً واحصل على خصم يصل إلى 20% على جميع الرتب!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">📞 اتصل بنا</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4"><i class="fas fa-headset"></i> طرق الدعم</h4>
+                            <div class="mb-4">
+                                <h6><i class="fab fa-discord text-primary"></i> ديسكورد:</h6>
+                                <p class="mb-2">- سيرفر الدعم: <a href="https://discord.gg/eEUXxeEBKT"
+                                        target="_blank">discord.gg/eEUXxeEBKT</a></p>
+                                <p class="mb-0">- قناة التذاكر: <a
+                                        href="https://discord.com/channels/1445508458429546751/1445891422518640773"
+                                        target="_blank">📩┃رفع-تذكرة</a></p>
+                            </div>
+                            <div class="mb-4">
+                                <h6><i class="fas fa-envelope text-danger"></i> الإيميل:</h6>
+                                <p class="mb-0">stormemcstore@outlook.sa</p>
+                            </div>
+                            <div>
+                                <h6><i class="fas fa-clock text-warning"></i> أوقات الدعم:</h6>
+                                <p class="mb-0">24/7 على مدار الساعة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4"><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h4>
+                            <div class="accordion" id="faqAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#faq1">
+                                            كيف أبدأ الاشتراك؟
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse show"
+                                        data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            1. اختر الرتبة المناسبة<br>
+                                            2. اضغط على زر الاشتراك<br>
+                                            3. ادفع عبر الطريقة التي تفضلها<br>
+                                            4. انتظر التفعيل (أقل من 24 ساعة)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#faq2">
+                                            ما هي طرق الدفع؟
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            - STC Pay<br>
+                                            - مدى<br>
+                                            - Apple Pay<br>
+                                            - تحويل بنكي<br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="mb-4"><i class="fas fa-crown"></i> STORM MC STORE</h4>
+                    <p class="text-muted">نظام الرتب الحصري الأفضل في الوطن العربي. انضم إلى النخبة واستمتع بتجربة فريدة
+                        في الدسكورد وماينكرافت.</p>
+                    <div class="mt-3">
+                        <a href="https://discord.gg/eEUXxeEBKT" target="_blank" class="text-muted me-3"><i
+                                class="fab fa-discord fa-lg"></i></a>
+                        <a href="mailto:stormemcstore@outlook.sa" class="text-muted me-3"><i
+                                class="fas fa-envelope fa-lg"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5 class="mb-4">الرتب</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#ranks" class="text-muted text-decoration-none">سلاسة النخبة</a></li>
+                        <li class="mb-2"><a href="#ranks" class="text-muted text-decoration-none">التاج الذهبي</a></li>
+                        <li class="mb-2"><a href="#ranks" class="text-muted text-decoration-none">الماس</a></li>
+                        <li class="mb-2"><a href="#ranks" class="text-muted text-decoration-none">بريق الألماس</a></li>
+                        <li class="mb-2"><a href="#ranks" class="text-muted text-decoration-none">النجمة الفضية</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-6 mb-4">
+                    <h5 class="mb-4">الدعم</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#contact" class="text-muted text-decoration-none">اتصل بنا</a></li>
+                        <li class="mb-2"><a href="#faq" class="text-muted text-decoration-none">الأسئلة الشائعة</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">الشروط والأحكام</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-4">تابعنا</h5>
+                    <p class="text-muted">انضم لمجتمعنا على الدسكورد واحصل على آخر التحديثات والعروض.</p>
+                    <a href="https://discord.gg/eEUXxeEBKT" target="_blank" class="btn btn-outline-light w-100">
+                        <i class="fab fa-discord"></i> انضم لسيرفر الدسكورد
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1);">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">© 2024 STORM MC STORE. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">
+                        <i class="fas fa-globe me-1"></i> مستضاف على
+                        <a href="https://replit.com" target="_blank" class="text-muted">Replit</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SweetAlert2 for beautiful modals -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // بيانات الرتب
+        const ranks = {
+            celestial: {
+                name: "سلاسة النخبة",
+                icon: "🌟",
+                monthly: 50,
+                yearly: 500,
+                color: "celestial",
+                textColor: "text-white"
+            },
+            golden: {
+                name: "التاج الذهبي",
+                icon: "👑",
+                monthly: 25,
+                yearly: 250,
+                color: "golden",
+                textColor: "text-dark"
+            },
+            diamond: {
+                name: "الماس",
+                icon: "💎",
+                monthly: 10,
+                yearly: 100,
+                color: "diamond",
+                textColor: "text-dark"
+            },
+            sparkle: {
+                name: "بريق الألماس",
+                icon: "✨",
+                monthly: 5,
+                yearly: 50,
+                color: "sparkle",
+                textColor: "text-dark"
+            },
+            silver: {
+                name: "النجمة الفضية",
+                icon: "⭐",
+                monthly: 2.5,
+                yearly: 25,
+                color: "silver",
+                textColor: "text-dark"
+            }
+        };
+
+        // دالة الاشتراك
+        function subscribeRank(rankType, period) {
+            const rank = ranks[rankType];
+            const price = period === 'monthly' ? rank.monthly : rank.yearly;
+            const periodText = period === 'monthly' ? 'شهر' : 'سنة';
+            const savings = period === 'yearly' ? ` (توفير ${rank.monthly * 12 - price} ريال)` : '';
+
+            Swal.fire({
+                title: `${rank.icon} ${rank.name}`,
+                html: `
+                    <div class="text-center">
+                        <div style="font-size: 4rem;">${rank.icon}</div>
+                        <h4 class="mt-3">${rank.name}</h4>
+                        <div class="display-6 fw-bold my-3">${price} ريال</div>
+                        <p>لمدة ${periodText} كاملة${savings}</p>
+                        
+                        <div class="text-start mt-4">
+                            <h6>معلومات الاشتراك:</h6>
+                            <input type="text" id="discordName" class="form-control mb-2" placeholder="اسمك في الدسكورد (مثال: Ahmed#1234)" required>
+                            <select id="paymentMethod" class="form-select mb-3" required>
+                                <option value="">اختر طريقة الدفع</option>
+                                <option value="stc">STC Pay</option>
+                                <option value="mada">مدى</option>
+                                <option value="apple">Apple Pay</option>
+                                <option value="bank">تحويل بنكي</option>
+                            </select>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'إتمام الدفع',
+                cancelButtonText: 'إلغاء',
+                confirmButtonColor: '#6366f1',
+                preConfirm: () => {
+                    const discordName = document.getElementById('discordName').value;
+                    const paymentMethod = document.getElementById('paymentMethod').value;
+
+                    if (!discordName || !paymentMethod) {
+                        Swal.showValidationMessage('يرجى ملء جميع الحقول');
+                        return false;
+                    }
+
+                    return {discordName, paymentMethod};
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showPaymentDetails(rank, price, periodText, result.value);
+                }
+            });
+        }
+
+        // عرض تفاصيل الدفع
+        function showPaymentDetails(rank, price, period, userData) {
+            Swal.fire({
+                title: '💳 إتمام الدفع',
+                html: `
+                    <div class="text-center">
+                        <div style="font-size: 3rem;">${rank.icon}</div>
+                        <h4 class="mt-2">${rank.name}</h4>
+                        <p>المستخدم: ${userData.discordName}</p>
+                        <div class="alert alert-info">
+                            <h5>المبلغ: ${price} ريال</h5>
+                            <p>لمدة: ${period}</p>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6>📱 طرق الدفع:</h6>
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary w-100 mb-2" onclick="showQRCode('stc')">
+                                        STC Pay
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-success w-100 mb-2" onclick="showQRCode('mada')">
+                                        مدى
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-dark w-100 mb-2" onclick="showQRCode('apple')">
+                                        Apple Pay
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-outline-warning w-100 mb-2" onclick="showBankTransfer()">
+                                        تحويل بنكي
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'تم الدفع',
+                cancelButtonText: 'رجوع'
+            });
+        }
+
+        // عرض QR Code
+        function showQRCode(method) {
+            const methodNames = {
+                stc: 'STC Pay',
+                mada: 'مدى',
+                apple: 'Apple Pay'
+            };
+
+            Swal.fire({
+                title: `📲 ${methodNames[method]}`,
+                html: `
+                    <div class="text-center">
+                        <p>مسح الكود التالي للدفع:</p>
+                        <div style="width: 200px; height: 200px; background: #f3f4f6; margin: 20px auto; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 4rem;">📱</div>
+                                <small class="text-muted">كود الدفع</small>
+                            </div>
+                        </div>
+                        <p class="mt-3">أو ارسل المبلغ إلى: <strong>0551234567</strong></p>
+                    </div>
+                `,
+                confirmButtonText: 'تم الدفع',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSuccess();
+                }
+            });
+        }
+
+        // عرض التحويل البنكي
+        function showBankTransfer() {
+            Swal.fire({
+                title: '🏦 تحويل بنكي',
+                html: `
+                    <div class="text-start">
+                        <p>قم بالتحويل إلى:</p>
+                        <div class="alert alert-info">
+                            <p><strong>اسم البنك:</strong> الراجحي</p>
+                            <p><strong>اسم المستفيد:</strong> STORM MC STORE</p>
+                            <p><strong>IBAN:</strong> SA44 2000 0001 2345 6789 1234</p>
+                            <p><strong>رقم الحساب:</strong> 1234567890123456</p>
+                        </div>
+                        <p>بعد التحويل، أرسل صورة الإيصال على الدسكورد.</p>
+                    </div>
+                `,
+                confirmButtonText: 'تم التحويل',
+                showCancelButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showSuccess();
+                }
+            });
+        }
+
+        // عرض نجاح الدفع
+        function showSuccess() {
+            Swal.fire({
+                title: '🎉 تم بنجاح!',
+                html: `
+                    <div class="text-center">
+                        <div style="font-size: 5rem; color: #10b981;">✓</div>
+                        <h4 class="mt-3">تم استلام طلبك!</h4>
+                        <p class="mt-3">سيتم تفعيل رتبتك خلال 24 ساعة كحد أقصى.</p>
+                        <div class="alert alert-success mt-3">
+                            <h6>🚀 الخطوات التالية:</h6>
+                            <ol class="text-start mt-2">
+                                <li>انضم لسيرفر الدسكورد: <a href="https://discord.gg/eEUXxeEBKT" target="_blank">discord.gg/eEUXxeEBKT</a></li>
+                                <li>افتح تذكرة في قسم الدعم: <a href="https://discord.com/channels/1445508458429546751/1445891422518640773" target="_blank">📩┃رفع-تذكرة</a></li>
+                                <li>ارسل اسم المستخدم</li>
+                                <li>انتظر التفعيل</li>
+                            </ol>
+                        </div>
+                    </div>
+                `,
+                confirmButtonText: 'حسناً',
+                icon: 'success'
+            });
+        }
+
+        // عرض مقارنة الرتب
+        function showComparison() {
+            Swal.fire({
+                title: '📊 مقارنة الرتب',
+                html: `
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>الميزة</th>
+                                    <th class="text-center">🌟</th>
+                                    <th class="text-center">👑</th>
+                                    <th class="text-center">💎</th>
+                                    <th class="text-center">✨</th>
+                                    <th class="text-center">⭐</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>العملات الشهرية</td>
+                                    <td class="text-center">100,000</td>
+                                    <td class="text-center">50,000</td>
+                                    <td class="text-center">30,000</td>
+                                    <td class="text-center">15,000</td>
+                                    <td class="text-center">5,000</td>
+                                </tr>
+                                <tr>
+                                    <td>نسبة الخصم</td>
+                                    <td class="text-center">75%</td>
+                                    <td class="text-center">50%</td>
+                                    <td class="text-center">40%</td>
+                                    <td class="text-center">25%</td>
+                                    <td class="text-center">10%</td>
+                                </tr>
+                                <tr>
+                                    <td>التأثيرات</td>
+                                    <td class="text-center">⭐ ⭐ ⭐ ⭐ ⭐</td>
+                                    <td class="text-center">⭐ ⭐ ⭐ ⭐</td>
+                                    <td class="text-center">⭐ ⭐ ⭐</td>
+                                    <td class="text-center">⭐ ⭐</td>
+                                    <td class="text-center">⭐</td>
+                                </tr>
+                                <tr>
+                                    <td>الدعم</td>
+                                    <td class="text-center">24/7</td>
+                                    <td class="text-center">سريع</td>
+                                    <td class="text-center">عادي</td>
+                                    <td class="text-center">أساسي</td>
+                                    <td class="text-center">أساسي</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                width: 800,
+                confirmButtonText: 'حسناً'
+            });
+        }
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({behavior: 'smooth'});
+                    }
+                });
+            });
+
+            // Add animation to elements on scroll
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all rank cards
+            document.querySelectorAll('.rank-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+
+</html>
